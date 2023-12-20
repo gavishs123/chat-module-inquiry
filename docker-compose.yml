@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  # Next.js service
+  nextjs:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - '5000:5000' # Map the Node.js app port
+    environment:
+      MONGO_URL: "mongodb://mongo:27017/chat" # Update with your MongoDB connection URL
+    depends_on:
+      - mongo # Depend on the MongoDB service
+
+  # MongoDB service
+  mongo:
+    image: mongo:latest
+    ports:
+      - '27017:27017' # Map the MongoDB port
